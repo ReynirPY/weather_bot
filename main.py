@@ -3,16 +3,16 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiohttp import ClientSession
 import os
+from config import Config, load_config
 #import dotenv
 
-from environs import Env
+config: Config = load_config()
 
-env = Env()
-env.read_env()
 
-BOT_TOKEN = env('BOT_TOKEN')
 
-WEATHER_API_KEY = env('WEATHER_API_KEY')
+BOT_TOKEN = config.bot.token
+
+WEATHER_API_KEY = config.weatherApi.key
 
 users: dict[int, dict[str, bool]] = {}
 
