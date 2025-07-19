@@ -6,12 +6,10 @@ import os
 from config import Config, load_config
 #import dotenv
 
+
+
 config: Config = load_config()
-
-
-
 BOT_TOKEN = config.bot.token
-
 WEATHER_API_KEY = config.weatherApi.key
 
 users: dict[int, dict[str, bool]] = {}
