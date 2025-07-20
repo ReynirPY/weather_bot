@@ -28,6 +28,10 @@ async def process_start(message:Message):
 
     await message.answer(f"🌤️ Welcome to WeatherWise Bot! 🌤️\nHi {message.from_user.first_name} I'm your personal weather assistant, ready to help you stay informed about the weather anywhere in the world.\n Press /help to see how work with bot") # type: ignore
 
+@dp.message(Command(commands='help'))
+async def  process_help(message:Message):
+    await message.answer(text='Write me a place location  and i will show you current weather there\n\n/change_temperature_units to switch celsius and fahrenheit\n/change_measure_units to switch between kilometers and miles\nother features in developing process')
+
 @dp.message(Command(commands='change_temperature_units'))
 async def change_temperatue_units(message:Message):
     users[message.from_user.id]['celsiusOrFahrenheit'] =  not  users[message.from_user.id]['celsiusOrFahrenheit'] # type: ignore
@@ -48,6 +52,14 @@ async def change_measure_units(message:Message):
 
 @dp.message()
 async def process_current(message:Message):
+
+    if len(message.text) > 50: # type: ignore
+        await message.answer(text='your message is out of length range')
+        return
+    elif message.text.isdigit(): # type: ignore
+        await message.answer(text='location name cant be a number')
+        return
+
     async with ClientSession() as session:
         async with session.get(f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={message.text}&aqi=no') as response:
             print('Status', response.status)
