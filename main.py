@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher
 
-from handlers import user, current
+from handlers import user, current, forecast
 
 from config import Config, load_config
 import asyncio
@@ -18,6 +18,7 @@ async def main():
     dp['weather_api_key'] = WEATHER_API_KEY
 
     dp.include_router(user.router)
+    dp.include_router(forecast.router)
     dp.include_router(current.router)
 
 
