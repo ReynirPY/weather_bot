@@ -36,7 +36,7 @@ async def procees_forecast(message:Message, weather_api_key:str):
                         answer_string += f'**{day_of_week}** ({month} {number})\n'
 
 
-                    if users[message.from_user.id]['celsiusOrFahrenheit']:
+                    if users[message.from_user.id]['celsiusOrFahrenheit']: # type: ignore
                         answer_string +=f'{emojiConditions[condition_code]['day']} {day['day']['maxtemp_c']}°C / {day['day']['mintemp_c']}°C - {day['day']['condition']['text']}\n\n'
                     else:
                         answer_string +=f'{emojiConditions[condition_code]['day']} {day['day']['maxtemp_f']}°F / {day['day']['mintemp_f']}°F - {day['day']['condition']['text']}\n\n'

@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher
 
-from handlers import user, current, forecast
+from handlers import user, current, forecast, hourly
 
 from config import Config, load_config
 import asyncio
@@ -19,6 +19,7 @@ async def main():
 
     dp.include_router(user.router)
     dp.include_router(forecast.router)
+    dp.include_router(hourly.router)
     dp.include_router(current.router)
 
 
